@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Final";
+}
+<div class="btn-group">
+    @Html.ActionLink("Cancel", "Index", "Account", null, null, null, null, htmlAttributes: new { @class = "form-control text-center" })
+    <br />
+</div>
+<link rel="stylesheet" type="text/css" href="~/Content/BackgroundFinal.css" />
+<div class="container">
+    <div class="jumbotron">
+        <h3 class="text-center">Final Page</h3>
+        <div class="text-center">
+            <hr />
+            <h4>This is your selected pizza size:</h4>
+            <br />
+            <h6>@ViewBag.pizza Size Pizza</h6>
+            <br />
+            <hr />
+            <h4>With the following ingedients:</h4>
+            <br />
+            <h6>@ViewBag.Ingredients</h6>
+        </div>
+        <div class="text-center">
+            <h4>The total is:</h4>
+            <br />
+            <h6>R @ViewBag.Total</h6>
+            <hr />
+            <div class="btn-group">
+                <p class="strong">Not happy? You can go back to design with this link</p>
+                @Html.ActionLink("Back to Design", "Design", "Order", null, null, null, null, htmlAttributes: new { @class = "form-control text-center" })
+            </div>
+        </div>
+    </div>
+    <div class=" text-center">
+        <h3 class="jumbotron">Happy? Just select the Payment and the Address we should deliver to</h3>
+        @using (Html.BeginForm())
+        {
+        <div class="container jumbotron">
+            <div class="col-md-6 form-group">
+                <p>Choose only one Payment method</p>
+                <hr />
+                @Html.ListBox("Payment", ViewBag.Payment as MultiSelectList, new { @class = "form-control text-center center-block" })
+                <p class="text-center">Payment will take place on delivery</p>
+            </div>
+            <div class="col-md-6 form-group">
+                <p>Address</p>
+                <hr />
+                <div class="form-group">
+                    Area : @Html.DropDownList("DeliveriesList", null, "Select Area", new { @class = "form-control center-block text-center" })
+                    @Html.ValidationMessage("Delivery's", "", new { @class = " center-block text-center text-danger" })
+                </div>
+                <div class="form-group">
+                    Address : @Html.TextBox("AddressLine", null, new { @class = "form-control center-block text center" })
+                    @Html.ValidationMessage("Delivery's", "", new { @class = " center-block text-center text-danger" })
+                </div>
+            </div>
+            @if ((string)Session["PaymenetError"] == "Error" || (string)Session["NoPayment"] == "Error")
+            {
+                <p class="text-danger">No area or address or payment given, please provide all details.</p>
+            }
+        </div>
+            <div class="form-group text-center">
+                <div class="text-center">
+                    <input type="submit" value="Submit" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+</div>

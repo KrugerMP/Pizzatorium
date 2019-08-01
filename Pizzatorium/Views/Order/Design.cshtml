@@ -1,0 +1,49 @@
+﻿@model Pizzatorium.Models.DesignClass
+@{
+    ViewBag.Title = "Design";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/BackgroundDesign.css" />
+<div class="container">
+    <div class="jumbotron">
+        <h2 class="text-center">Design Time @Session["Username"]</h2>
+    </div>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-horizontal text-center">
+            <div class="jumbotron col-md-6">
+                <h3>@Html.LabelFor(m => m.form, htmlAttributes: new { @class = "control-label " })</h3>
+                <hr />
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.form, ViewBag.PizzaSizes as SelectList, new { @class = "form-control text-center center-block panel panel-info" })
+                    @Html.ValidationMessageFor(m => m.form, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="jumbotron col-md-6">
+                <div class="form-group">
+                    <h3>@Html.LabelFor(m => m.IngredientSelect, htmlAttributes: new { @class = "control-label" })</h3>
+                    <hr />
+                    @for (int i = 0; i < ViewBag.TotalDrop; i++)
+                    {
+                        <div>
+                            @Html.DropDownListFor(m => m.IngredientSelect, ViewBag.IngredientSelect as SelectList, "Select Ingredient", new { @class = "form-control center-block text-center list-group list-group-item-info" })
+                            @Html.ValidationMessageFor(m => m.IngredientSelect, "", new { @class = "text-danger" })
+                            <br />
+                        </div>
+                    }
+                    @if ((string)Session["Error"] == "Error")
+                    {
+                        <p class="text-danger">No Ingredient/s Selected</p>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="form-group text-center">
+            <div>
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>

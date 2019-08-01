@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "ThankYou";
+}
+<link type="text/css" rel="stylesheet" href="~/Content/BackgroundThankYou.css" />
+<div class="container text-center">
+    <div class="jumbotron">
+        <h1>Thank You</h1>
+        <h2>Here is your Reciept Details:</h2>
+        <p>@ViewBag.Reciept</p>
+        <p>With the amount of R @ViewBag.Total</p>
+        <hr />
+        <br />
+        <h4>The following person will deliver your pizza:</h4>
+        <br />
+        <h5>@ViewBag.DeliveryPerson</h5>
+    </div>
+    <img src="@Url.Content(ViewBag.ImagePath)" alt="Delivery Person Image" />
+    <hr />
+    <div class="jumbotron">
+            <h4>Purchase Details:</h4>
+            <p class="text-primary">Payment Method Chosen:</p>
+            <h5>@ViewBag.PaymentChosen</h5>
+            <p class="text-primary">Address Details:</p>
+            <h5>@ViewBag.AddressGiven</h5>
+            <h5>@ViewBag.Area</h5>
+    </div>
+    <div class="btn-group">
+        @Html.ActionLink("Back to Login", "Index", "Account", null, null, null, null, htmlAttributes: new { @class = "form-control text-center" })
+    </div>
+</div>
+
